@@ -6,15 +6,6 @@ import (
 	"strconv"
 )
 
-type List interface {
-	Get(index int) (interface{},error)
-	Set(index int,newval interface{}) error
-	Delete(index int) error
-	Clear()
-	Append(newval interface{})
-	Insert(index int,newval interface{}) error
-}
-
 type ArrayList struct {
 	datastore []interface{}
 	size int
@@ -46,13 +37,13 @@ func (a *ArrayList) Delete(index int) error {
 	if err != nil {
 		return err
 	}
-	a.datastore = append(a.datastore[:index],a.datastore[index + 1 :])
+	a.datastore = append(a.datastore[:index],a.datastore[index + 1 :]...)
 	a.size --
 	return nil
 }
 
 func (a *ArrayList)Clear() {
-	a.datastore = make([]interface{},10)
+	a.datastore = make([]interface{},0,10)
 	a.size = 0
 }
 
@@ -66,18 +57,31 @@ func (a *ArrayList) Insert(index int,newval interface{}) error {
 	if err != nil {
 		return err
 	}
-	a.datastore = append(a.datastore, "")
+	a.datastore = append(a.datastore, newval)
 
-	for i:=len(a.datastore);i>=index;i-- {
-		fmt.Println(a.size)
-		a.datastore[i-1] = a.datastore[i -2]
+	for i:=len(a.datastore) - 1;i>=index;i-- {
+		a.datastore[i] = a.datastore[i - 1]
 	}
 	a.datastore[index] = newval
 	a.size ++
 	return nil
 }
 
+func (a *ArrayList) Iterator() Iteratorer {
+	it:=new(Iterator)
+	it.list = a
+	it.currentIndex = 0
+	return it
+}
 
+
+func (a *ArrayList) String() string {
+		return fmt.Sprint(a.datastore)
+}
+
+func (a *ArrayList) Size() int {
+	return a.size
+}
 
 func (a *ArrayList) checkIndexOut(index int) error {
 	if index < 0 || index > a.size {

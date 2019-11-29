@@ -6,21 +6,18 @@ import (
 )
 
 func main() {
-	var list ArrayList.List = ArrayList.NewArrayList()
+	var list ArrayList.Lister = ArrayList.NewArrayList()
+	list.Append("a")
+	list.Append("b")
+	list.Append("c")
+	list.Append("d")
+	list.Append("e")
 	list.Append(1)
-	err:=list.Set(0,2)
-	if err != nil {
-		fmt.Println(err)
+
+	fmt.Println(list.String())
+	for it:=list.Iterator();it.HasNext();{
+		val := it.Next()
+		fmt.Println(val)
 	}
-	val,err:=list.Get(0)
-	if err != nil {
-		fmt.Println(err)
-	}
-	fmt.Println(val)
-	fmt.Println(list)
-	err=list.Insert(0,1)
-	if err != nil {
-		fmt.Println(err)
-	}
-	fmt.Println(list)
+	fmt.Println(list.String())
 }
