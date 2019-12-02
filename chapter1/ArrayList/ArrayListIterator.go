@@ -1,6 +1,7 @@
 package ArrayList
 
-import log "github.com/corgi-kx/logcustom"
+import "log"
+
 
 type Iterator struct {
 	list Lister
