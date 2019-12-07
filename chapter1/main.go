@@ -2,6 +2,8 @@ package main
 
 import (
 	"data_structure_and_algorithms/chapter1/ArrayList"
+	"data_structure_and_algorithms/chapter1/CircleQueue"
+	"data_structure_and_algorithms/chapter1/Queue"
 	"data_structure_and_algorithms/chapter1/Stack"
 	"fmt"
 )
@@ -95,7 +97,7 @@ func main7() {
 }
 
 //利用栈来实现斐波那契数列
-func main() {
+func main8() {
 	var s Stack.Stack = Stack.NewStackList()
 	s.Push(12)
 	data:=0
@@ -127,4 +129,45 @@ func FBN(num int) int {
 		return 1
 	}
 	return  FBN(num - 1 ) + FBN(num - 2)
+}
+
+
+//测试队列
+func main9() {
+	q:=Queue.NewQueue()
+	q.EnQueue("a")
+	q.EnQueue("b")
+	q.EnQueue("c")
+	q.EnQueue("d")
+	fmt.Println(q.DeQueue())
+	fmt.Println(q.DeQueue())
+	fmt.Println(q.DeQueue())
+	fmt.Println(q.DeQueue())
+	fmt.Println(q.IsEmpty())
+	q.EnQueue("a")
+	q.EnQueue("b")
+	q.EnQueue("c")
+	q.EnQueue("d")
+	fmt.Println(q.Size())
+	fmt.Println(q.Front())
+	fmt.Println(q.Last())
+
+}
+
+//测试循环队列
+func main() {
+	cq:=CircleQueue.NewCircleQueue()
+	cq.EnQueue("a")
+	cq.EnQueue("b")
+	cq.EnQueue("c")
+	cq.EnQueue("d")
+	err:=cq.EnQueue("e")
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Println(cq.DeQueue())
+	fmt.Println(cq.DeQueue())
+	fmt.Println(cq.DeQueue())
+	fmt.Println(cq.DeQueue())
+	fmt.Println(cq.DeQueue())
 }
