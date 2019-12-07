@@ -37,10 +37,10 @@ func (c *circleQueue) DeQueue() (interface{}, error) {
 	return data,nil
 }
 
-func (c *circleQueue) getLength() int {
+func (c *circleQueue) GetLength() int {
 	return (c.rear - c.front + queueCount) % queueCount
 }
 
-func (c *circleQueue) clear() {
+func (c *circleQueue) Clear() {
 	c = NewCircleQueue()
 }
