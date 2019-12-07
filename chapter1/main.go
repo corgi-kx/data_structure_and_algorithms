@@ -3,6 +3,7 @@ package main
 import (
 	"data_structure_and_algorithms/chapter1/ArrayList"
 	"data_structure_and_algorithms/chapter1/CircleQueue"
+	LinkeQueue "data_structure_and_algorithms/chapter1/LinkQueue"
 	"data_structure_and_algorithms/chapter1/LinkeStack"
 	"data_structure_and_algorithms/chapter1/Queue"
 	"data_structure_and_algorithms/chapter1/Stack"
@@ -175,7 +176,7 @@ func main10() {
 }
 
 //测试链表栈
-func main() {
+func main11() {
 	s:=LinkeStack.New()
 	for i:=0;i<=10;i++ {
 		s.Push(i)
@@ -187,4 +188,18 @@ func main() {
 			fmt.Println(s.Size())
 		}
  	}
+}
+
+//测试链式队列
+func main() {
+	q:=LinkeQueue.New()
+
+	for i:=0;i<=10000;i++ {
+		q.EnQueue(i)
+	}
+
+	for !q.IsEmpty() {
+		fmt.Println(q.DeQueue())
+	}
+	fmt.Println(q.DeQueue())
 }
