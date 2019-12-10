@@ -17,11 +17,24 @@ func MergeSort(arr []string) []string {
 }
 
 func merge(left, right []string) []string {
-
+	newArr := make([]string,0)
+	l,r:=0,0
+	for l<len(left) && r < len(right) {
+		if left[l] < right[r] {
+			newArr = append(newArr,left[l])
+			l ++
+		}else {
+				newArr = append(newArr,right[r])
+				r ++
+		}
+	}
+	newArr = append(newArr, left[l:]...)
+	newArr = append(newArr, right[r:]...)
+	return newArr
 }
 
 func main() {
-	arr := []string{"i", "a", "c", "z", "n", "f", "q", "b", "t", "j", "f", "d", "p", "s", "e", "z", "h", "a"}
-	newArr := OddEvenSort(arr)
+	arr := []string{"r","i", "y","a", "v","m","u","c","k", "n", "f","l", "g","q", "b", "t", "j","x", "d", "p", "s", "e", "z", "w","h", "o"}
+	newArr := MergeSort(arr)
 	fmt.Println(newArr)
 }
