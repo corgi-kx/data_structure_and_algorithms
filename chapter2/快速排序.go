@@ -18,14 +18,14 @@ func quickSort(values []string) []string{
 			i++
 		}
 	}
-	values[left] = mid
+	//values[left] = mid
 	quickSort(values[:left])
 	quickSort(values[left+1:])
 	return values
 }
 
 func main() {
-	arr := []string{"i", "a", "c", "z", "n", "f", "q", "b", "t", "j", "f", "d", "p", "s", "e", "z", "h", "a"}
+	arr := []string{"i","q", "a","y","w","a", "c", "z", "w","n", "f", "q", "b", "t", "j", "f", "d", "p", "s", "e", "z", "h", "a"}
 	quickSort(arr)
 	fmt.Println(arr)
 }
