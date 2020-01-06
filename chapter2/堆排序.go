@@ -4,21 +4,21 @@ import (
 	"fmt"
 )
 
-func HeapSort(arr []string) []string {
+func HeapSort(arr []string)  {
 	length := len(arr)
 	if length <= 1 {
-		return arr
+		return
 	} else {
-		for i := 0; i < length-1; i++ {
-			arr[i] = HeapSortMax(arr[i+1:])
+		for i := 0; i < length; i++ {
+			last:=length - i - 1
+			HeapSortMax(arr,last)
+			arr[0],arr[last] = arr[last],arr[0]
 		}
 	}
-	return arr
 }
 
 //堆排序公式，  左边子节点大小 = 2 × 父节点大小 + 1    右边子节点大小 = 2 × 父节点大小 + 2
-func HeapSortMax(arr []string) string {
-	length := len(arr)
+func HeapSortMax(arr []string,length int)  {
 	//这里需要遍历倒数第二层的根节点,所以需要长度除以二得到的就是最后一个根节点的编号，然后递减遍历所有根节点
 	for i := length / 2; i >= 0; i-- {
 		topmax := i
@@ -36,12 +36,10 @@ func HeapSortMax(arr []string) string {
 			arr[i], arr[topmax] = arr[topmax], arr[i]
 		}
 	}
-	return arr[0]
-
 }
 
 func main() {
-	arr := []string{"i", "a", "c", "z", "n", "f", "q", "b", "t", "j", "f", "d", "p", "s", "e", "z", "h", "a"}
-	newArr := HeapSort(arr)
-	fmt.Println(newArr)
+	arr := []string{"i", "a","m","n","e","x","z","r","g","d", "c", "z", "n", "f", "q", "b", "t", "j", "f", "d", "p", "s", "e", "z", "h", "a"}
+	HeapSort(arr)
+	fmt.Println(arr)
 }
