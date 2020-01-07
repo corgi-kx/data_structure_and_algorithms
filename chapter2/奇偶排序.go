@@ -4,7 +4,6 @@ import (
 	"fmt"
 )
 
-//堆排序公式，  左边子节点大小 = 2 × 父节点大小 + 1    右边子节点大小 = 2 × 父节点大小 + 2
 func OddEvenSort(arr []string) []string {
 	length := len(arr)
 	isSorted := false

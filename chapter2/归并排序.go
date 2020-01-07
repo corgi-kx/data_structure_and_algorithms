@@ -1,40 +1,39 @@
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
-func MergeSort(arr []string) []string {
-	length := len(arr)
+func mergeSort(nums []int) []int{
+	length:=len(nums)
 	if length <= 1 {
-		return arr
-	} else {
-		mid := length / 2
-		leftArr := MergeSort(arr[:mid])
-		rightArr := MergeSort(arr[mid:])
-		return merge(leftArr, rightArr)
+		return nums
 	}
+	mid := length /2
+	left:= mergeSort(nums[mid:])
+	right := mergeSort(nums[:mid])
+	return merge(left,right)
 }
 
-func merge(left, right []string) []string {
-	newArr := make([]string,0)
-	l,r:=0,0
-	for l<len(left) && r < len(right) {
-		if left[l] < right[r] {
-			newArr = append(newArr,left[l])
-			l ++
-		}else {
-				newArr = append(newArr,right[r])
-				r ++
+func merge(left,right []int) (newNum []int) {
+	li,ri:=0,0
+	ll,rl:=len(left),len(right)
+	for li <ll && ri <rl {
+		if left[li] < right[ri] {
+			newNum = append(newNum,left[li])
+			li ++
+			continue
 		}
+		newNum = append(newNum,right[ri])
+		ri ++
 	}
-	newArr = append(newArr, left[l:]...)
-	newArr = append(newArr, right[r:]...)
-	return newArr
+	if li <ll {
+		newNum = append(newNum,left[li:]...)
+	}else if ri < rl {
+		newNum = append(newNum,right[ri:]...)
+	}
+	return
 }
 
 func main() {
-	arr := []string{"r","i", "y","a", "v","m","u","c","k", "n", "f","l", "g","q", "b", "t", "j","x", "d", "p", "s", "e", "z", "w","h", "o"}
-	newArr := MergeSort(arr)
-	fmt.Println(newArr)
+	nums:=[]int{1,5,9,8,4,5,2,3,6,1,2,4,2,5,6,4,7,8,2,1,4,5,2,7,2,5,8,9,6,2,1,3,4,7,8,9,6,5,4,2,8,7,6,5,2,1,4,7,5,2,3,6}
+	fmt.Println(mergeSort(nums))
 }

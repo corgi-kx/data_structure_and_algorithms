@@ -7,18 +7,14 @@ import (
 
 func insertSort(arr []string) []string {
 	length := len(arr)
-	if length <= 1 {
-		return arr
-	} else {
-		for i := 1; i < length; i++ {
-			backup:=arr[i]
-			j:=i - 1
-			for j>=0 && strings.Compare(backup,arr[j]) < 0   {
-				arr[j+1] = arr[j]
-				j--
-			}
-			arr[j+1] = backup
+	for i := 1; i < length; i++ {
+		backup := arr[i]
+		j := i - 1
+		for j >= 0 && strings.Compare(backup, arr[j]) < 0 {
+			arr[j+1] = arr[j]
+			j--
 		}
+		arr[j+1] = backup
 	}
 	return arr
 
