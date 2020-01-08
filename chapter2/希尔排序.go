@@ -9,16 +9,16 @@ func main() {
 }
 
 func shellSort(nums []string) {
-	length:=len(nums)
-	for gap:=length / 2;gap>0;gap/=2 {
-		for i:=gap;i<length;i++ {
-			j:=i - gap
-			targetNum:=nums[i]
-			for j>=0 && nums[j] > targetNum {
-				nums[j],nums[j+gap] = nums[j+gap],nums[j]
+	length := len(nums)
+	for gap := length / 2; gap > 0; gap /= 2 {
+		for i := gap; i < length; i++ {
+			j := i - gap
+			targetNum := nums[i]
+			for j >= 0 && nums[j] > targetNum {
+				nums[j], nums[j+gap] = nums[j+gap], nums[j]
 				j -= gap
 			}
-			nums[j + gap] = targetNum
+			nums[j+gap] = targetNum
 		}
 	}
 }

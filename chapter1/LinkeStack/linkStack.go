@@ -12,33 +12,32 @@ func New() *node {
 	return new(node)
 }
 
-
 func (n *node) Push(val interface{}) {
 	newNode := New()
 	newNode.data = val
 	newNode.next = n.next
 	n.next = newNode
-	n.size ++
+	n.size++
 }
 
-func (n *node) Pop() (interface{},error){
+func (n *node) Pop() (interface{}, error) {
 	if n.IsEmpty() {
-		return nil,errors.New("栈是空的")
+		return nil, errors.New("栈是空的")
 	}
 	data := n.next.data
 	n.next = n.next.next
-	n.size --
-	return data,nil
+	n.size--
+	return data, nil
 }
 
-func (n *node) Size() int{
+func (n *node) Size() int {
 	return n.size
 }
 
-func (n *node) IsEmpty()bool {
+func (n *node) IsEmpty() bool {
 	if n.next == nil {
 		return true
-	}else  {
+	} else {
 		return false
 	}
 }

@@ -2,33 +2,32 @@ package ArrayList
 
 import "log"
 
-
 type Iterator struct {
-	list Lister
+	list         Lister
 	currentIndex int
 }
 
 func (a *Iterator) HasNext() bool {
-	return a.currentIndex  < a.list.Size()
+	return a.currentIndex < a.list.Size()
 }
 
-func (a *Iterator)  Next() interface{} {
-	val,err:= a.list.Get(a.currentIndex)
+func (a *Iterator) Next() interface{} {
+	val, err := a.list.Get(a.currentIndex)
 	if err != nil {
 		log.Panic(err)
 	}
-	a.currentIndex ++
+	a.currentIndex++
 	return val
 }
 
-func (a *Iterator)  Remove()  {
-	a.currentIndex --
-	err:=a.list.Delete(a.currentIndex)
+func (a *Iterator) Remove() {
+	a.currentIndex--
+	err := a.list.Delete(a.currentIndex)
 	if err != nil {
 		log.Panic(err)
 	}
 }
 
-func (a *Iterator)  GetIndex() int {
+func (a *Iterator) GetIndex() int {
 	return a.currentIndex
 }

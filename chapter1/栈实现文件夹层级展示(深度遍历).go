@@ -7,27 +7,27 @@ import (
 )
 
 func main() {
-	path:="/home/scorpio/app/golang-SDK/GOPATH/src"
+	path := "/home/scorpio/app/golang-SDK/GOPATH/src"
 	mystack := Stack.NewStackList()
 	mystack.Push(path)
 	//文件池
-	files:=make([]string,0)
+	files := make([]string, 0)
 	for !mystack.IsEmpty() {
-		path =mystack.Pop().(string)
+		path = mystack.Pop().(string)
 		files = append(files, path)
-		fs,_:=ioutil.ReadDir(path)
-		for _,f:=range fs {
+		fs, _ := ioutil.ReadDir(path)
+		for _, f := range fs {
 			if f.IsDir() {
-				dirName :=path+"/"+f.Name()
+				dirName := path + "/" + f.Name()
 				mystack.Push(dirName)
-			}else {
-				fileName := path+"/"+f.Name()
+			} else {
+				fileName := path + "/" + f.Name()
 				files = append(files, fileName)
 			}
 		}
 	}
 
-	for _,v:=range files {
+	for _, v := range files {
 		fmt.Println(v)
 	}
 }

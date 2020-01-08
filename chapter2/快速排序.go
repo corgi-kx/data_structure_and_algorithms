@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-func quickSort(values []string) []string{
+func quickSort(values []string) []string {
 	if len(values) <= 1 {
 		return values
 	}
@@ -25,7 +25,7 @@ func quickSort(values []string) []string{
 }
 
 func main() {
-	arr := []string{"i","q", "a","y","w","a", "c", "z", "w","n", "f", "q", "b", "t", "j", "f", "d", "p", "s", "e", "z", "h", "a"}
+	arr := []string{"i", "q", "a", "y", "w", "a", "c", "z", "w", "n", "f", "q", "b", "t", "j", "f", "d", "p", "s", "e", "z", "h", "a"}
 	quickSort(arr)
 	fmt.Println(arr)
 }

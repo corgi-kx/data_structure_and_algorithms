@@ -19,7 +19,7 @@ func NewCircleQueue() *circleQueue {
 }
 
 func (c *circleQueue) EnQueue(val interface{}) error {
-	if (c.rear+1) % queueCount  == c.front % queueCount {
+	if (c.rear+1)%queueCount == c.front%queueCount {
 		return errors.New("循环队列已满,不能再添加了")
 	}
 	c.data[c.rear] = val
@@ -29,12 +29,12 @@ func (c *circleQueue) EnQueue(val interface{}) error {
 
 func (c *circleQueue) DeQueue() (interface{}, error) {
 	if c.rear == c.front {
-		return nil,errors.New("循环队列是空的！")
+		return nil, errors.New("循环队列是空的！")
 	}
-	data:=c.data[c.front]
+	data := c.data[c.front]
 	c.data[c.front] = ""
-	c.front = (c.front + 1)%queueCount
-	return data,nil
+	c.front = (c.front + 1) % queueCount
+	return data, nil
 }
 
 func (c *circleQueue) GetLength() int {

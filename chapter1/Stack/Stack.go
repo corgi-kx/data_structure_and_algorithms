@@ -17,8 +17,8 @@ type StackList struct {
 }
 
 func NewStackList() *StackList {
-	s:= new(StackList)
-	s.datastore = make([]interface{},0)
+	s := new(StackList)
+	s.datastore = make([]interface{}, 0)
 	return s
 }
 
@@ -30,15 +30,15 @@ func (s *StackList) Size() int {
 }
 func (s *StackList) Pop() interface{} {
 	if !s.IsEmpty() {
-		result := s.datastore[s.Size() - 1]
-		s.datastore = s.datastore[:s.Size() - 1]
+		result := s.datastore[s.Size()-1]
+		s.datastore = s.datastore[:s.Size()-1]
 		return result
-	}else {
+	} else {
 		log.Panic("栈是空的")
 		return nil
 	}
 }
-func (s *StackList) Push(i interface{})  {
+func (s *StackList) Push(i interface{}) {
 	s.datastore = append(s.datastore, i)
 }
 func (s *StackList) IsEmpty() bool {

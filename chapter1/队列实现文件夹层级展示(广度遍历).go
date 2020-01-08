@@ -8,28 +8,28 @@ import (
 )
 
 func main() {
-	path:="/home/scorpio/app/golang-SDK/GOPATH/src/MyCode"
-	files:=[]string{}
-	q:=Queue.NewQueue()
+	path := "/home/scorpio/app/golang-SDK/GOPATH/src/MyCode"
+	files := []string{}
+	q := Queue.NewQueue()
 	q.EnQueue(path)
-	for !q.IsEmpty(){
+	for !q.IsEmpty() {
 		path = q.DeQueue().(string)
-		f,err:=ioutil.ReadDir(path)
+		f, err := ioutil.ReadDir(path)
 		if err != nil {
 			log.Panic(err)
 		}
-		for _,v:=range f {
+		for _, v := range f {
 			if v.IsDir() {
-				newpath:=path+"/"+v.Name()
+				newpath := path + "/" + v.Name()
 				q.EnQueue(newpath)
-				files = append(files,newpath )
-			}else {
-				files = append(files,path+"/"+v.Name() )
+				files = append(files, newpath)
+			} else {
+				files = append(files, path+"/"+v.Name())
 			}
 		}
 	}
 
-	for _,v:=range files {
+	for _, v := range files {
 		fmt.Println(v)
 	}
 }

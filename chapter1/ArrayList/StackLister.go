@@ -1,6 +1,5 @@
 package ArrayList
 
-
 type Stack interface {
 	Clear_SK()
 	Size_SK() int
@@ -9,8 +8,6 @@ type Stack interface {
 	IsEmpty_SK() bool
 	NewIterator() Iteratorer_SK
 }
-
-
 
 type Iteratorer_SK interface {
 	//判断是否迭代完毕

@@ -20,7 +20,7 @@ func main1() {
 	list.Append(1)
 
 	fmt.Println(list.String())
-	for it:=list.Iterator();it.HasNext();{
+	for it := list.Iterator(); it.HasNext(); {
 		val := it.Next()
 		fmt.Println(val)
 	}
@@ -34,13 +34,13 @@ func main2() {
 	s.Push(3)
 	s.Push(4)
 	size := s.Size()
-	for i:=0;i<size;i++ {
+	for i := 0; i < size; i++ {
 		fmt.Println(s.Pop())
 	}
-	for i:=0;i<=10000 ; i++ {
+	for i := 0; i <= 10000; i++ {
 		s.Push(i)
 	}
-	for i:=0;i<size;i++ {
+	for i := 0; i < size; i++ {
 		fmt.Println(s.Pop())
 	}
 }
@@ -52,23 +52,23 @@ func main3() {
 	s.Push_SK(3)
 	s.Push_SK(4)
 	size := s.Size_SK()
-	for i:=0;i<size;i++ {
+	for i := 0; i < size; i++ {
 		fmt.Println(s.Pop_SK())
 	}
-	for i:=0;i<=1000 ; i++ {
+	for i := 0; i <= 1000; i++ {
 		s.Push_SK(i)
 	}
-	for i:=0;i<size;i++ {
+	for i := 0; i < size; i++ {
 		fmt.Println(s.Pop_SK())
 	}
 }
 
 func main4() {
 	var s ArrayList.Stack = ArrayList.NewStackList()
-	for i:=0;i<=1000 ; i++ {
+	for i := 0; i <= 1000; i++ {
 		s.Push_SK(i)
 	}
-	for i:=s.NewIterator();i.HasNext_SK();{
+	for i := s.NewIterator(); i.HasNext_SK(); {
 		fmt.Println(i.Next_SK())
 	}
 }
@@ -81,9 +81,9 @@ func main5() {
 func main6() {
 	var s Stack.Stack = Stack.NewStackList()
 	s.Push(10)
-	data:=0
+	data := 0
 	for {
-		newVal:= s.Pop().(int)
+		newVal := s.Pop().(int)
 		data += newVal
 		if newVal == 0 {
 			break
@@ -102,13 +102,13 @@ func main7() {
 func main8() {
 	var s Stack.Stack = Stack.NewStackList()
 	s.Push(12)
-	data:=0
-	for !s.IsEmpty(){
+	data := 0
+	for !s.IsEmpty() {
 		newVal := s.Pop().(int)
 		if newVal == 1 || newVal == 2 {
 			data += 1
-		}else {
-			s.Push(newVal - 1 )
+		} else {
+			s.Push(newVal - 1)
 			s.Push(newVal - 2)
 		}
 	}
@@ -119,24 +119,22 @@ func main8() {
 func recursion1(num int) int {
 	if num == 0 {
 		return 0
-	}else {
-		return num + recursion1(num - 1)
+	} else {
+		return num + recursion1(num-1)
 	}
 }
-
 
 //递归实现斐波那契
 func FBN(num int) int {
 	if num == 1 || num == 2 {
 		return 1
 	}
-	return  FBN(num - 1 ) + FBN(num - 2)
+	return FBN(num-1) + FBN(num-2)
 }
-
 
 //测试队列
 func main9() {
-	q:=Queue.NewQueue()
+	q := Queue.NewQueue()
 	q.EnQueue("a")
 	q.EnQueue("b")
 	q.EnQueue("c")
@@ -158,12 +156,12 @@ func main9() {
 
 //测试循环队列
 func main10() {
-	cq:=CircleQueue.NewCircleQueue()
+	cq := CircleQueue.NewCircleQueue()
 	cq.EnQueue("a")
 	cq.EnQueue("b")
 	cq.EnQueue("c")
 	cq.EnQueue("d")
-	err:=cq.EnQueue("e")
+	err := cq.EnQueue("e")
 	if err != nil {
 		fmt.Println(err)
 	}
@@ -177,8 +175,8 @@ func main10() {
 
 //测试链表栈
 func main11() {
-	s:=LinkeStack.New()
-	for i:=0;i<=10;i++ {
+	s := LinkeStack.New()
+	for i := 0; i <= 10; i++ {
 		s.Push(i)
 	}
 
@@ -187,14 +185,14 @@ func main11() {
 			fmt.Println(s.Pop())
 			fmt.Println(s.Size())
 		}
- 	}
+	}
 }
 
 //测试链式队列
 func main() {
-	q:=LinkeQueue.New()
+	q := LinkeQueue.New()
 
-	for i:=0;i<=10000;i++ {
+	for i := 0; i <= 10000; i++ {
 		q.EnQueue(i)
 	}
 
