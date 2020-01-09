@@ -2,37 +2,20 @@ package main
 
 import "fmt"
 
-func HeapSort(arr []int) {
-	length := len(arr)
-	if length <= 1 {
-		return
-	} else {
-		for i := 0; i < length; i++ {
-			last := length - i - 1
-			HeapSortMax(arr, last)
-			arr[0], arr[last] = arr[last], arr[0]
+func HeapSort(nums []int) {
+	length := len(nums)
+	for i := 0; i < length; i++ {
+		last := length - i
+		for i := last / 2; i >= 0; i-- {
+			top, left, right := i, 2*i+1, 2*i+2
+			if left < last && nums[top] < nums[left] {
+				nums[top], nums[left] = nums[left], nums[top]
+			}
+			if right < last && nums[top] < nums[right] {
+				nums[top], nums[right] = nums[right], nums[top]
+			}
 		}
-	}
-}
-
-//堆排序公式，  左边子节点大小 = 2 × 父节点大小 + 1    右边子节点大小 = 2 × 父节点大小 + 2
-func HeapSortMax(arr []int, length int) {
-	//这里需要遍历倒数第二层的根节点,所以需要长度除以二得到的就是最后一个根节点的编号，然后递减遍历所有根节点
-	for i := length / 2; i >= 0; i-- {
-		topmax := i
-		leftchild := 2*topmax + 1
-		rightchild := 2*topmax + 2
-		//如果左边比我大，我就记录左边
-		if leftchild < length && arr[topmax] < arr[leftchild] {
-			topmax = leftchild
-		}
-		//如果右边比我大，我就记录右边
-		if rightchild < length && arr[topmax] < arr[rightchild] {
-			topmax = rightchild
-		}
-		if topmax != i {
-			arr[i], arr[topmax] = arr[topmax], arr[i]
-		}
+		nums[0], nums[last -1] = nums[last -1], nums[0]
 	}
 }
 
