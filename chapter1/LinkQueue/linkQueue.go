@@ -24,7 +24,7 @@ func (q *queue) EnQueue(val interface{}) {
 		q.rear = newNode
 	} else {
 		q.rear.next = newNode
-		q.rear = newNode
+		q.rear = newNode     //也可以写作  q.rear = q.rear.next
 	}
 	q.size++
 }
