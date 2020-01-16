@@ -18,7 +18,7 @@ type QQ struct {
 var datastoreQQ []QQ
 
 func main() {
-	f, err := os.Open("data.txt")
+	f, err := os.Open(".././data.txt")
 	if err != nil {
 		panic(err)
 	}

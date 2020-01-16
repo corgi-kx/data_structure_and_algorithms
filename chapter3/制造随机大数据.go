@@ -25,13 +25,13 @@ package main
 //
 //func main() {
 //	now:=time.Now()
-//	f, err := os.Create("data2.txt")
+//	f, err := os.Create("data.txt")
 //	if err != nil {
 //		panic(err)
 //	}
 //	defer f.Close()
 //	w:=bufio.NewWriter(f)
-//	for i := 0; i < 1000000; i++ {
+//	for i := 0; i < 30000000; i++ {
 //		id, pass := RandomGen()
 //		str := strconv.Itoa(int(id)) + " # " + pass
 //		_,err:=w.WriteString(str+"\n")

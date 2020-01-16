@@ -54,7 +54,9 @@ func main() {
 func binarySort(id int, data []QQ) {
 	dataLength := len(data)
 	left, right := 0, dataLength-1
+	times:=0
 	for left <= right {
+		times ++
 		mid := (left + right) / 2
 		if id > data[mid].QQnum {
 			left = mid + 1
@@ -63,9 +65,11 @@ func binarySort(id int, data []QQ) {
 		} else {
 			fmt.Println("找到了，下标是", mid)
 			fmt.Println(data[mid])
+			fmt.Println("查找次数：",times,"次！！！")
 			return
 		}
 	}
+	fmt.Println("查找次数：",times,"次！！！")
 	fmt.Println("没找到！！！")
 }
 
