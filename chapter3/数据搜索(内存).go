@@ -5,14 +5,13 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"strconv"
 	"strings"
 	"sync"
 	"time"
 )
 
-var datastore []string
-const threadNum  = 10
-
+const threadNum = 10
 
 func main() {
 	f, err := os.Open("data.txt")
@@ -28,33 +27,42 @@ func main() {
 				break
 			}
 		}
-		pass := strings.Split(string(line), " # ")[1]
-		datastore = append(datastore,pass)
+		id, err2 := strconv.Atoi(strings.Split(string(line), " # ")[0])
+		if err2 != nil {
+			panic(err2)
+		}
+		password := strings.Split(string(line), " # ")[1]
+		datastoreQQ = append(datastoreQQ, QQ{id, password})
 	}
 	fmt.Println("已将数据加载进切片中...")
-	length:=len(datastore)
+	length := len(datastoreQQ)
 	for {
-		fmt.Println("请输入要搜索的字符串：")
+		fmt.Println("请输入要搜索的id：")
 		str := ""
 		fmt.Scanln(&str)
-		now:=time.Now()
+		id, err2 := strconv.Atoi(str)
+		if err2 != nil {
+			fmt.Println("请输入数字！")
+			continue
+		}
+		now := time.Now()
 		gap := length / threadNum
-		index:=0
-		wg:=sync.WaitGroup{}
-		for i:=0;i<threadNum;i++ {
+		index := 0
+		wg := sync.WaitGroup{}
+		for i := 0; i < threadNum; i++ {
 			wg.Add(1)
-			go seach(str,datastore[index:index+gap],&wg)
-			index +=gap
+			go seach(id, datastoreQQ[index:index+gap], &wg)
+			index += gap
 		}
 		wg.Wait()
-		fmt.Println("用时：",time.Since(now))
+		fmt.Println("用时：", time.Since(now))
 	}
 }
 
-func seach(target string,data []string,wg *sync.WaitGroup) {
-	for i,_:=range data {
-		if strings.Contains(data[i],target) {
-			fmt.Println(data[i])
+func seach(id int, data []QQ, wg *sync.WaitGroup) {
+	for i, _ := range data {
+		if data[i].QQnum == id {
+			fmt.Println("找到了：", data[i])
 		}
 	}
 	wg.Done()

@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"strconv"
 	"strings"
 	"time"
 )
@@ -18,20 +19,25 @@ func main() {
 		defer f.Close()
 
 		r := bufio.NewReader(f)
-		fmt.Println("请输入要搜索的字符串：")
+		fmt.Println("请输入要搜索的id")
 		str := ""
 		fmt.Scanln(&str)
-		now:=time.Now()
+		target, err := strconv.Atoi(str)
+		if err != nil {
+			fmt.Println("请输入数字id：")
+			continue
+		}
+		now := time.Now()
 		for {
 			line, _, err := r.ReadLine()
 			if err == io.EOF {
 				break
 			}
-			pass := strings.Split(string(line), " # ")[1]
-			if strings.Contains(pass, str) {
-				fmt.Println(pass)
+			id, _ := strconv.Atoi(strings.Split(string(line), " # ")[0])
+			if id == target {
+				fmt.Println(string(line))
 			}
 		}
-		fmt.Println("用时：",time.Since(now))
+		fmt.Println("用时：", time.Since(now))
 	}
 }
