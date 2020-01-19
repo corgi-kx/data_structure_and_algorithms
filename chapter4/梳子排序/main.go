@@ -18,6 +18,5 @@ func combSort(nums []int)  {
 				nums[i],nums[i + gap] = nums[i +gap],nums[i]
 			}
 		}
-
 	}
 }
