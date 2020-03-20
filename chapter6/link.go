@@ -26,6 +26,7 @@ type Linker interface {
 	SelectSort()
 	InsertSort()
 	MergeSort()
+	QuickSort()
 }
 
 func New() *LinkNode {
@@ -42,22 +43,22 @@ func (l *LinkNode) HeadInsert(data Element) {
 	}
 }
 
-func (l *LinkNode) Append(data Element) {
-	nNode := New()
-	nNode.data = data
+func (l *LinkNode) Append(node *LinkNode) {
 	if l.IsEmpty() {
-		l.pNext = nNode
+		l.pNext = node
 	}else {
 		lastNode := l.pNext
 		for lastNode.pNext != nil {
 			lastNode = lastNode.pNext
 		}
-		lastNode.pNext = nNode
+		lastNode.pNext = node
 	}
 }
 
 func (l *LinkNode) Add(data Element) {
-	l.Append(data)
+	nNode := New()
+	nNode.data = data
+	l.Append(nNode)
 }
 
 func (l *LinkNode) Show() {
@@ -287,6 +288,58 @@ func Merge(left,right *LinkNode) *LinkNode{
 	return result
 }
 
+
+
+func (l *LinkNode) QuickSort() {
+		l.pNext = quickSortFuc(l.pNext)
+}
+
+func quickSortFuc(node *LinkNode) *LinkNode {
+	if node == nil || node.pNext == nil{
+		return node
+	}
+	mid := node
+
+	left,right := New(),New()
+	for node != nil {
+		if node.data <= mid.data && node != mid {
+			left.Add(node.data)
+		}else if node.data > mid.data && node != mid{
+			right.Add(node.data)
+		}
+		node = node.pNext
+	}
+
+	mid.pNext = nil
+
+	leftResult,rightResult := New(),New()
+	if left.pNext != nil {
+		leftResult.pNext =quickSortFuc(left.pNext)
+	}
+	if right.pNext!= nil {
+		rightResult.pNext=quickSortFuc(right.pNext)
+	}
+
+
+	final :=New()
+	if leftResult.pNext!=nil {
+		for leftResult.pNext!= nil {
+			final.Add(leftResult.pNext.data)
+			leftResult = leftResult.pNext
+		}
+	}
+	final.Add(mid.data)
+	if rightResult.pNext != nil{
+		for rightResult.pNext!= nil {
+			final.Add(rightResult.pNext.data)
+			rightResult = rightResult.pNext
+		}
+	}
+
+	return final.pNext
+}
+
+
 func main() {
 	link:=New()
 	link.Add(9)
@@ -306,7 +359,7 @@ func main() {
 	//link.Insert(2,3)
 	//link.Show()
 	//link.Reversal()
-	link.MergeSort()
+	link.QuickSort()
 	link.Show()
 	//link.Reversal()
 	//link.Show()
