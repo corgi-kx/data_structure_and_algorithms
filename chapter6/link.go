@@ -27,6 +27,7 @@ type Linker interface {
 	InsertSort()
 	MergeSort()
 	QuickSort()
+	GetNodeTail() *LinkNode
 }
 
 func New() *LinkNode {
@@ -294,50 +295,100 @@ func (l *LinkNode) QuickSort() {
 		l.pNext = quickSortFuc(l.pNext)
 }
 
-func quickSortFuc(node *LinkNode) *LinkNode {
-	if node == nil || node.pNext == nil{
+func quickSortFuc(node *LinkNode) *LinkNode{
+	if node == nil || node.pNext == nil {
 		return node
 	}
+	left,right:=New(),New()
+	leftbak,rightbak := left,right
 	mid := node
-
-	left,right := New(),New()
 	for node != nil {
-		if node.data <= mid.data && node != mid {
-			left.Add(node.data)
-		}else if node.data > mid.data && node != mid{
-			right.Add(node.data)
+		if node.data <= mid.data  && node != mid {
+			left.pNext = node
+			left = left.pNext
+		}else if node.data > mid.data && node !=mid {
+			right.pNext = node
+			right = right.pNext
 		}
 		node = node.pNext
 	}
-
 	mid.pNext = nil
+	leftResult,rightResult:= New(),New()
+	if leftbak.pNext != nil {
+		left.pNext = nil
 
-	leftResult,rightResult := New(),New()
-	if left.pNext != nil {
-		leftResult.pNext =quickSortFuc(left.pNext)
+		leftResult.pNext = quickSortFuc(leftbak.pNext)
 	}
-	if right.pNext!= nil {
-		rightResult.pNext=quickSortFuc(right.pNext)
-	}
+	if rightbak.pNext != nil {
+		right.pNext = nil
 
-
-	final :=New()
-	if leftResult.pNext!=nil {
-		for leftResult.pNext!= nil {
-			final.Add(leftResult.pNext.data)
-			leftResult = leftResult.pNext
-		}
+		rightResult.pNext = quickSortFuc(rightbak.pNext)
 	}
-	final.Add(mid.data)
-	if rightResult.pNext != nil{
-		for rightResult.pNext!= nil {
-			final.Add(rightResult.pNext.data)
-			rightResult = rightResult.pNext
-		}
+	finalNode:= New()
+	if leftResult.pNext != nil {
+		finalNode.GetNodeTail().pNext = leftResult.pNext
 	}
-
-	return final.pNext
+	finalNode.GetNodeTail().pNext = mid
+	if rightResult.pNext != nil {
+		finalNode.GetNodeTail().pNext = rightResult.pNext
+	}
+	return finalNode.pNext
 }
+
+func (l *LinkNode) GetNodeTail() *LinkNode {
+	if l.pNext == nil {
+		return  l
+	}
+	tail := l.pNext
+	for tail.pNext != nil {
+		tail = tail.pNext
+	}
+	return tail
+}
+//func quickSortFuc(node *LinkNode) *LinkNode {
+//	if node == nil || node.pNext == nil{
+//		return node
+//	}
+//	mid := node
+//
+//	left,right := New(),New()
+//	for node != nil {
+//		if node.data <= mid.data && node != mid {
+//			left.Add(node.data)
+//		}else if node.data > mid.data && node != mid{
+//			right.Add(node.data)
+//		}
+//		node = node.pNext
+//	}
+//
+//	mid.pNext = nil
+//
+//	leftResult,rightResult := New(),New()
+//	if left.pNext != nil {
+//		leftResult.pNext =quickSortFuc(left.pNext)
+//	}
+//	if right.pNext!= nil {
+//		rightResult.pNext=quickSortFuc(right.pNext)
+//	}
+//
+//
+//	final :=New()
+//	if leftResult.pNext!=nil {
+//		for leftResult.pNext!= nil {
+//			final.Add(leftResult.pNext.data)
+//			leftResult = leftResult.pNext
+//		}
+//	}
+//	final.Add(mid.data)
+//	if rightResult.pNext != nil{
+//		for rightResult.pNext!= nil {
+//			final.Add(rightResult.pNext.data)
+//			rightResult = rightResult.pNext
+//		}
+//	}
+//
+//	return final.pNext
+//}
 
 
 func main() {
