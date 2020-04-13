@@ -12,22 +12,21 @@ func main() {
 func shellSort(arr []int) {
 	length := len(arr)
 	for gap := length / 2; gap > 0; gap /= 2 {
-		insertSort(arr,gap)
+		insertSort(arr, gap)
 	}
 }
 
 func insertSort(arr []int, gap int) {
-	length:=len(arr)
-	for k := gap;k<=gap * 2; k ++ {
+	length := len(arr)
+	for k := gap; k <= gap*2; k++ {
 		go func(k int) {
-			for i := 0; i < length-k; i+=k {
+			for i := 0; i < length-k; i += k {
 				j := i + k
 				for j > 0 && arr[j] < arr[j-k] {
 					arr[j], arr[j-k] = arr[j-k], arr[j]
-					j-=k
+					j -= k
 				}
 			}
 		}(k)
-
 	}
 }
